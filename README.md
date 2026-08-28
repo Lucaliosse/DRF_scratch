@@ -18,6 +18,11 @@ To apply the migrations:
 To run the server:
 `python manage.py runserve`
 
-Access
+Web access:
 Swagger UI: http://127.0.0.1:8000/api/schema/swagger-ui/
 ReDoc: http://127.0.0.1:8000/api/schema/redoc/
+
+To run unit tests:
+`pytest`
+To run one specific unit test:
+`pytest test_views.py::TestProductViewset::test_filter_products_by_category_id`

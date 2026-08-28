@@ -2,3 +2,5 @@ Django==6.1
 djangorestframework==3.18
 pydantic==2.13
 drf-spectacular==0.30
+pytest==9.1
+pytest-django==4.14
