@@ -19,10 +19,11 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework import routers
 
-from training.views import CategoryViewset
+from training.views import CategoryViewset, ProductViewset
 
 router = routers.SimpleRouter()
 router.register('category', CategoryViewset, basename='category')
+router.register('product', ProductViewset, basename='product')
 
 
 urlpatterns = [
