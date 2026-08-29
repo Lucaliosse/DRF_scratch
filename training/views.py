@@ -8,7 +8,7 @@ class CategoryViewset(ModelViewSet):
     serializer_class = CategorySerializer
 
     def get_queryset(self):
-        return Category.objects.filter(active=True)
+        return Category.objects.filter()
 
 
 class ProductViewset(ModelViewSet):
