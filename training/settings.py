@@ -10,22 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-g6wa1!+=+6-$6j6h-h=4k4w$3jl%fx%j7vjh49404gw)03t-gj",
+)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-g6wa1!+=+6-$6j6h-h=4k4w$3jl%fx%j7vjh49404gw)03t-gj"
+# Security warning: don't run DEBUG in production, as it can display critical information
+# about the application to the user
+DEBUG = os.environ.get("DEBUG", "True").lower() in ("true", "1", "yes")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
 
 
 # Application definition
