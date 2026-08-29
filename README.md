@@ -37,7 +37,7 @@ source .venv/bin/activate
 .venv\Scripts\Activate
 
 # Install dependencies
-pip install Django==6.1 djangorestframework drf-spectacular pytest pytest-django
+pip install requirements.txt
 
 # Apply migrations
 python manage.py migrate
@@ -101,10 +101,6 @@ pytest
 pytest test_views.py::TestProductViewset::test_filter_products_by_category_id
 ```
 
-### Test Database
-
-Tests use a temporary test database that's automatically created and rolled back after each test. No mocking is used — real database queries are executed against the test database.
-
 ---
 
 ## Code Formatting
@@ -130,7 +126,7 @@ The application supports the following environment variables:
 
 | Variable | Purpose | Default |
 |----------|---------|---------|
-| `DEBUG` | Enable/disable debug mode | `True` |
+| `DEBUG` | Enable/disable debug mode. WARNING: Set to False in production | `True` |
 | `SECRET_KEY` | Django secret key | Insecure dev key |
 | `ALLOWED_HOSTS` | Comma-separated allowed hosts | Empty |
 
@@ -193,3 +189,4 @@ The application supports the following environment variables:
 - [ ] Role-based access control
 - [ ] Database connection pooling
 - [ ] API rate limiting
+- [ ] Proper database (PostgreSQL instead of SQLite)
