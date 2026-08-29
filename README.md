@@ -27,5 +27,11 @@ To run unit tests:
 To run one specific unit test:
 `pytest test_views.py::TestProductViewset::test_filter_products_by_category_id`
 
+Formatting: black. Use an extension ("Black Formatter" on VScode) or manually format with:
+`pip install black`
+`black .`
+
 Features:
 - Query counting middleware, to track the number of database queries for each API calls in the API logs in DEBUG.
+
+

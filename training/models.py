@@ -23,7 +23,9 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     active = models.BooleanField(default=False)
 
-    category = models.ForeignKey('training.Category', on_delete=models.CASCADE, related_name='products')
+    category = models.ForeignKey(
+        "training.Category", on_delete=models.CASCADE, related_name="products"
+    )
 
     def __str__(self):
         return self.name
@@ -39,7 +41,9 @@ class Article(models.Model):
     active = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=4, decimal_places=2)
 
-    product = models.ForeignKey('training.Product', on_delete=models.CASCADE, related_name='articles')
+    product = models.ForeignKey(
+        "training.Product", on_delete=models.CASCADE, related_name="articles"
+    )
 
     def __str__(self):
         return self.name
