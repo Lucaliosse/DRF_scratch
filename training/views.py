@@ -1,14 +1,25 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from training.models import Category, Product
-from training.serializers import CategorySerializer, ProductSerializer
+from training.serializers import (
+    CategoryListSerializer,
+    CategoryDetailSerializer,
+    ProductSerializer,
+)
 
 
-class CategoryViewset(ModelViewSet):
+class CategoryViewset(ReadOnlyModelViewSet):
 
-    serializer_class = CategorySerializer
+    serializer_class = CategoryListSerializer
+    detail_serializer_class = CategoryDetailSerializer
 
     def get_queryset(self):
         return Category.objects.filter()
+
+    def get_serializer_class(self):
+        # Get single item -> use detail serializer
+        if self.action == "retrieve":
+            return self.detail_serializer_class
+        return super().get_serializer_class()
 
 
 class ProductViewset(ModelViewSet):

@@ -10,7 +10,14 @@ class ProductSerializer(ModelSerializer):
         fields = ["id", "name", "description", "active", "category"]
 
 
-class CategorySerializer(ModelSerializer):
+class CategoryListSerializer(ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ["id", "date_created", "date_updated", "name", "products"]
+
+
+class CategoryDetailSerializer(ModelSerializer):
 
     # By using `SerializerMethodField', we need to implement a
     # 'get_XXX' where XXX is the attribut hame, here 'products'
