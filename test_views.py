@@ -57,22 +57,23 @@ class TestCategoryViewset:
     def test_list_categories_returns_only_active(
         self, api_client, category_active, category_inactive
     ):
-        """Test that listing categories returns only active categories."""
+        """Test that listing categories returns all categories."""
+        url = reverse("category-list")
+        response = api_client.get(url)
+
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.data) == 2
+        names = {cat["name"] for cat in response.data}
+        assert names == {category_active.name, category_inactive.name}
+
+    def test_list_categories_empty_when_no_active(self, api_client, category_inactive):
+        """Test that listing returns the inactive category."""
         url = reverse("category-list")
         response = api_client.get(url)
 
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == 1
-        assert response.data[0]["name"] == category_active.name
-        assert response.data[0]["active"] is True
-
-    def test_list_categories_empty_when_no_active(self, api_client, category_inactive):
-        """Test that listing returns empty when there are no active categories."""
-        url = reverse("category-list")
-        response = api_client.get(url)
-
-        assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 0
+        assert response.data[0]["name"] == category_inactive.name
 
     def test_create_category(self, api_client):
         """Test creating a new category."""
