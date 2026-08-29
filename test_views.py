@@ -126,6 +126,20 @@ class TestCategoryViewset:
         assert response.status_code == status.HTTP_204_NO_CONTENT
         assert Category.objects.count() == 0
 
+    def test_disable_category(self, api_client, category_active, product_active):
+        """Test disabling a category disables the category and all its products."""
+        url = reverse("category-disable", kwargs={"pk": category_active.pk})
+        response = api_client.post(url)
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["message"]
+
+        category_active.refresh_from_db()
+        product_active.refresh_from_db()
+
+        assert category_active.active is False
+        assert product_active.active is False
+
 
 @pytest.mark.django_db
 class TestProductViewset:
