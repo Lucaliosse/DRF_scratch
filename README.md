@@ -34,4 +34,6 @@ Formatting: black. Use an extension ("Black Formatter" on VScode) or manually fo
 Features:
 - Query counting middleware, to track the number of database queries for each API calls in the API logs in DEBUG.
 
-
+Improvements:
+- About section with env variables (DEBUG...)
+- git commit hook that run black, pytest, block the commit if test fails
