@@ -16,7 +16,7 @@ To apply the migrations:
 `python manage.py migrate`
 
 To run the server:
-`python manage.py runserve`
+`python manage.py runserver`
 
 Web access:
 Swagger UI: http://127.0.0.1:8000/api/schema/swagger-ui/
@@ -26,3 +26,6 @@ To run unit tests:
 `pytest`
 To run one specific unit test:
 `pytest test_views.py::TestProductViewset::test_filter_products_by_category_id`
+
+Features:
+- Query counting middleware, to track the number of database queries for each API calls in the API logs in DEBUG.
