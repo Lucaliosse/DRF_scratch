@@ -18,19 +18,16 @@ class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
         fields = ["id", "date_created", "date_updated", "name", "products"]
+        read_only_fields = ["products"]
 
     def validate_name(self, value):
-        # Nous vérifions que la catégorie existe
-        if Category.objects.filter(name=value).exists():
+        queryset = Category.objects.filter(name=value)
+        if self.instance is not None:
+            queryset = queryset.exclude(pk=self.instance.pk)
+        if queryset.exists():
             # En cas d'erreur, DRF nous met à disposition l'exception ValidationError
             raise ValidationError("Category already exists")
         return value
-
-    def validate(self, data):
-        pass
-        # if data['name'] not in data['description']:
-        #     raise ValidationError('Name must be in description')
-        # return data
 
 
 class CategoryListSerializer(CategorySerializer):
